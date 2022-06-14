@@ -22,6 +22,7 @@ def mondai():
       for i in (char):
         if i not in char_K:
             print(i)#表示
+      return i
 
 def seikai():
     kazu = int(input("欠損文字はいくつ？"))
