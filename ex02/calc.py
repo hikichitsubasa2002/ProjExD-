@@ -7,8 +7,14 @@ print(__name__)
 def button_click(event):
     btn = event.widget
     num = btn["text"]
-    #tkm.showinfo("",f"{num}のボタンが押されました")
-    entry.insert(tk.END, num)
+    if num == "=":
+        epn = entry.get()
+        res = eval(epn)
+        print(res)
+        entry.delete()
+    else:
+        #tkm.showinfo("",f"{num}のボタンが押されました")
+        entry.insert(tk.END, num)
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -19,7 +25,7 @@ if __name__ == "__main__":
     entry.grid(row=0,column=0,columnspan=3) 
     
     r,c = 1, 0
-    for i, num in enumerate([i for i in range(9, -1, -1)]+["+"]):
+    for i, num in enumerate([i for i in range(9, -1, -1)]+["+","="]):
         btn = tk.Button(root,
                         text=num,
                         width=4,
