@@ -5,29 +5,31 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     num = btn["text"]
-    if num == "=":
+    if num == "=":# 計算するとこ
         epn = entry.get()
         res = eval(epn)
         print(res)
         entry.delete(0,tk.END)
         entry.insert(tk.END,res)
-    elif num == "C":
+    elif num == "C": #全消し
         entry.delete(0,tk.END)
         entry.insert(tk.END)
     else:
         entry.insert(tk.END, num)
     
-    if num == "AC":
-        tkm.showerror("未実装","実装できてないよ")
+    if num == "AC": #一文字消し（未実装）
+        tkm.showerror("未実装","実装できてないよ")#実装できてないと警告
         cl = entry.get()
         ac = cl[::-1]
         entry.delete(0,tk.END)
         entry.insert(tk.END,str(ac))
 
         
-def button_C(event):
-    entry.delete(0,tk.END)
-    entry.insert(tk.END)
+#def button_C(event):#一文字消し（未実装）
+    #cl = entry.get()
+    #ac = cl[::-1]
+    #entry.delete(0,tk.END)
+    #entry.insert(tk.END)
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -44,8 +46,8 @@ if __name__ == "__main__":
                         width=5,
                         height=3,
                         font=("Helvetica",30),
-                        bg ="#434445",
-                        fg = "#ff0000",
+                        bg ="#434445",#背景を黒っぽい色に変更
+                        fg = "#ff0000",#文字色を赤に変更
                     )
 
         btn.bind("<1>",button_click)
