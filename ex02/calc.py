@@ -11,19 +11,19 @@ def button_click(event):
         print(res)
         entry.delete(0,tk.END)
         entry.insert(tk.END,res)
-    else:
-        entry.insert(tk.END, num)
-    if num == "C":
+    elif num == "C":
         entry.delete(0,tk.END)
         entry.insert(tk.END)
+    else:
+        entry.insert(tk.END, num)
     
     if num == "AC":
+        tkm.showerror("未実装","実装できてないよ")
         cl = entry.get()
         ac = cl[::-1]
         entry.delete(0,tk.END)
         entry.insert(tk.END,str(ac))
-    else:
-        entry.insert(tk.END, num)
+
         
 def button_C(event):
     entry.delete(0,tk.END)
