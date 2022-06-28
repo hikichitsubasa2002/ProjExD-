@@ -25,8 +25,7 @@ def main_proc(): #こうかとんの移動
 
     if maze_bg[my+delta[key][1]][mx+delta[key][0]] == 0:#壁の中に入らないようにする
         my,mx = my+delta[key][1],mx+delta[key][0]
-    else:
-        pass
+    
     
     cx,cy = mx*100+50,my*100+50
     cabvas.coords("tori",cx,cy)
