@@ -37,7 +37,7 @@ if __name__ == "__main__":
     root.title("迷えるこうかとん")
 
     cabvas = tk.Canvas(root,width=1500,height=900)
-    cabvas.create_rectangle(100,100,100+100,100+100,fill="red")
+    cabvas.create_rectangle(100,100,100+100,100+100,fill="red")#スタート
     cabvas.pack()
 
     maze_bg = mm.make_maze(15,9)#
