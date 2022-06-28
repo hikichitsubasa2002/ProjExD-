@@ -2,8 +2,6 @@
 import tkinter.messagebox as tkm
 import tkinter as tk
 import maze_maker as mm
-
-global cl
 cl = True
 
 def key_down(event):
@@ -13,13 +11,17 @@ def key_down(event):
 def key_up(event):
     global key ,cl
     key=""
-    if cx==1350 and cy==750 and cl==True :#ゴールのポップアップ
+    if cx==1350 and cy==750 :#ゴールのポップアップ
         tkm.showwarning(root,"  ゴール  ")
         cl = None
+    
+    if cx==1350 and cy==150:
+         tkm.showwarning(root,"  †お宝ゲット†  ")
+         cl = None
 
 def main_proc(): #こうかとんの移動
     global cx, cy,my,mx
-    delta = {"":[0,0],"Up":[0,-1],"s":[0,+1],"a":[-1,0],"d":[+1,0]}
+    delta = {"":[0,0],"w":[0,-1],"s":[0,+1],"a":[-1,0],"d":[+1,0]}
     
     # cx,cy = cx+delta[key][0], cy+delta[key][1]
 
@@ -37,11 +39,12 @@ if __name__ == "__main__":
     root.title("迷えるこうかとん")
 
     cabvas = tk.Canvas(root,width=1500,height=900)
-    cabvas.create_rectangle(100,100,100+100,100+100,fill="red")#スタート
     cabvas.pack()
 
     maze_bg = mm.make_maze(15,9)#
     mm.show_maze(cabvas,maze_bg)#
+    cabvas.create_rectangle(100,100,100+100,100+100,fill="red")#スター
+    cabvas.create_rectangle(1400,800,1400-100,800-100,fill="brown")#ゴール
     mx,my = 1,1
     cx,cy = mx*150,my*150
     tori = tk.PhotoImage(file="fig/1.png")
