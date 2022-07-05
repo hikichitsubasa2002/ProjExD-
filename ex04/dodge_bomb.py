@@ -1,8 +1,13 @@
+import tkinter as tk
+import tkinter.messagebox as tkm
 import pygame as pg
 import random
 import sys
 
+
+
 def main():
+    global tmr,tms
     clock = pg.time.Clock()
     # 練習１
     pg.display.set_caption('にげろ')
@@ -57,8 +62,8 @@ def main():
         vy *= tate 
 
         #練習8
-        if kkimg_rct.colliderect(bmimg_rct): return
-
+        if kkimg_rct.colliderect(bmimg_rct):return 
+            
 
         pg.display.update()
         clock.tick(1000)
@@ -68,13 +73,15 @@ def check_bound(rct,scr_rct):
 
     '''
     yoko,tate = +1,+1
-    if rct.left < scr_rct.left or scr_rct.right < rct.right: yoko *= -1 
-    if rct.top < scr_rct.top or scr_rct.bottom < rct.bottom: tate *= -1
+    if rct.left < scr_rct.left or scr_rct.right < rct.right: yoko *= -1.2 
+    if rct.top < scr_rct.top or scr_rct.bottom < rct.bottom: tate *= -1.2
     return yoko,tate
+
  
 
 if __name__ == "__main__":
     pg.init()
     main()
+    tkm.showerror(tkm.showerror("まけ","　　　　　　　　　　　　　　　 ,, -―-、\n　　　　　　　　　　　　　／　　　　 ヽ　　　　　　　／￣￣／　　／i⌒ヽ､|　　　　オエーー！！！！\n　　　　　　/　　（゜）/　　 ／　/\n　　　　　/　　　　 ト､.,../　,ー-､\n　　　　=彳　　　　　 ＼＼‘ﾟ。､｀ ヽ。、ｏ\n　　　　/ 　 　　　　　　　＼＼ﾟ。､。、ｏ\n      /                                       /⌒ ヽ ヽU     ｏ\n     /                                            │　    `ヽU  ∴ｌ\n    │　                                           │　        U  ：l\n|：!\n                                        Ｕ\n"))
     pg.quit()
     sys.exit()
