@@ -1,4 +1,5 @@
 from cmath import rect
+from ctypes.wintypes import HBITMAP
 import pygame as pg
 import sys
 import random
@@ -74,74 +75,110 @@ class Bomb:
         # 練習5
         self.blit(scr)
 
+class Frowe_up:
+    def __init__(self, chr: Bird):
+        self.sfc = pg.image.load("fig/flower_syokudaiookonnyaku.png")
+        self.sfc = pg.transform.rotozoom(self.sfc,0,0.6)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = chr.rct.center
+    
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+    
+    def update(self, scr:Screen):
+        self.rct.move_ip(0,-5)
+        self.blit(scr)
 
+class Frowe_d:
+    def __init__(self, chr: Bird):
+        self.sfc = pg.image.load("fig/nenga_mark03_ume.png")
+        self.sfc = pg.transform.rotozoom(self.sfc,0,0.6)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = chr.rct.center
+    
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+    
+    def update(self, scr:Screen):
+        self.rct.move_ip(0,5)
+        self.blit(scr)
 
-        
+class Frowe_l:
+    def __init__(self, chr: Bird):
+        self.sfc = pg.image.load("fig/flower_denfare.png")
+        self.sfc = pg.transform.rotozoom(self.sfc,0,0.5)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = chr.rct.center
+    
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+    
+    def update(self, scr:Screen):
+        self.rct.move_ip(+5,0)
+        self.blit(scr)
+
+class Frowe_r:
+    def __init__(self, chr: Bird):
+        self.sfc = pg.image.load("fig/flower_himawari_mark.png")
+        self.sfc = pg.transform.rotozoom(self.sfc,0,0.7)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = chr.rct.center
+    
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+    
+    def update(self, scr:Screen):
+        self.rct.move_ip(-5,0)
+        self.blit(scr)
+def bgm():
+    pg.mixer.music.load("fig/famipop3.mp3")
+    pg.mixer.music.play(loops=-1,start=0.0)
+
 
 def main():
     clock = pg.time.Clock()
 
     # # 練習1：スクリーンと背景画像
-    # pg.display.set_caption("逃げろ！こうかとん")
-    # screen_sfc = pg.display.set_mode((1600, 900)) # Surface
-    # screen_rct = screen_sfc.get_rect()            # Rect
-    # bgimg_sfc = pg.image.load("fig/pg_bg.jpg")    # Surface
-    # bgimg_rct = bgimg_sfc.get_rect()              # Rect
-    # screen_sfc.blit(bgimg_sfc, bgimg_rct)
-    scr = Screen("逃げろ！こうかとん",(1600,900),"fig/pg_bg.jpg")
+    scr = Screen("逃げろ！こうかとん",(1400,800),"fig/pg_bg.jpg")
 
     # # 練習3：こうかとん
-    # kkimg_sfc = pg.image.load("fig/6.png")    # Surface
-    # kkimg_sfc = pg.transform.rotozoom(kkimg_sfc, 0, 2.0)  # Surface
-    # kkimg_rct = kkimg_sfc.get_rect()          # Rect
-    # kkimg_rct.center = 900, 400
     kkt = Bird("fig/6.png",2.0,(900,400))
 
     # # 練習5：爆弾
-    # bmimg_sfc = pg.Surface((20, 20)) # Surface
-    # bmimg_sfc.set_colorkey((0, 0, 0)) 
-    # pg.draw.circle(bmimg_sfc, (255, 0, 0), (10, 10), 10)
-    # bmimg_rct = bmimg_sfc.get_rect() # Rect
-    # bmimg_rct.centerx = random.randint(0, screen_rct.width)
-    # bmimg_rct.centery = random.randint(0, screen_rct.height)
     # vx, vy = +1, +1 # 練習6
     bkb = Bomb((255,0,0),10,(+1,+1),scr)
+    beams = Frowe_up(kkt)
+    ume   = Frowe_d(kkt)
+    dnf   = Frowe_l(kkt)
+    hima  = Frowe_r(kkt)
 
     while True:
-        #screen_sfc.blit(bgimg_sfc, bgimg_rct)
         scr.blit()
         # 練習2
         for event in pg.event.get():
-            if event.type == pg.QUIT: return
-
-        # # 練習4
-        # key_states = pg.key.get_pressed() # 辞書
-        # if key_states[pg.K_UP]    == True: kkimg_rct.centery -= 1
-        # if key_states[pg.K_DOWN]  == True: kkimg_rct.centery += 1
-        # if key_states[pg.K_LEFT]  == True: kkimg_rct.centerx -= 1
-        # if key_states[pg.K_RIGHT] == True: kkimg_rct.centerx += 1
-        # # 練習7
-        # if check_bound(kkimg_rct, screen_rct) != (1, 1): # 領域外だったら
-        #     if key_states[pg.K_UP]    == True: kkimg_rct.centery += 1
-        #     if key_states[pg.K_DOWN]  == True: kkimg_rct.centery -= 1
-        #     if key_states[pg.K_LEFT]  == True: kkimg_rct.centerx += 1
-        #     if key_states[pg.K_RIGHT] == True: kkimg_rct.centerx -= 1
-        # screen_sfc.blit(kkimg_sfc, kkimg_rct)
+            if event.type == pg.QUIT: 
+                return
+            if event.type == pg.KEYDOWN and event.key == pg.K_w:
+                beams  = Frowe_up(kkt)
+            elif event.type == pg.KEYDOWN and event.key == pg.K_s:
+                ume = Frowe_d(kkt)
+            elif event.type == pg.KEYDOWN and event.key == pg.K_d:
+                dnf = Frowe_l(kkt)
+            elif event.type == pg.KEYDOWN and event.key == pg.K_a:
+                hima = Frowe_r(kkt)
         kkt.update(scr)
-
-        # 練習6
-        # bmimg_rct.move_ip(vx, vy)
-        # 練習5
-        # screen_sfc.blit(bmimg_sfc, bmimg_rct)
-        # 練習7
-        # yoko, tate = check_bound(bmimg_rct, screen_rct)
-        # vx *= yoko
-        # vy *= tate
         bkb.update(scr)
-
-
+        if beams !=0:
+            beams.update(scr)
+        if ume !=0:
+            ume.update(scr)
+        if ume !=0:
+            dnf.update(scr)
+        if ume !=0:
+            hima.update(scr)
+        
+        
         # 練習8
-        # if kkimg_rct.colliderect(bmimg_rct): return 
         if kkt.rct.colliderect(bkb.rct):
             return
         pg.display.update()
