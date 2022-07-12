@@ -150,9 +150,13 @@ def main():
     # vx, vy = +1, +1 # 練習6
     bkb = Bomb((255,0,0),10,(+1,+1),scr)
     beams = Frowe_up(kkt)
+    beams = 0
     ume   = Frowe_d(kkt)
+    ume   = 0 
     dnf   = Frowe_l(kkt)
+    dnf   = 0
     hima  = Frowe_r(kkt)
+    hima  = 0
 
     while True:
         scr.blit()
