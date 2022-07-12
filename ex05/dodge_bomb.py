@@ -1,5 +1,4 @@
 from cmath import rect
-from ctypes.wintypes import HBITMAP
 import pygame as pg
 import sys
 import random
@@ -75,6 +74,7 @@ class Bomb:
         # 練習5
         self.blit(scr)
 
+"""花を打ち出すクラス"""
 class Frowe_up:
     def __init__(self, chr: Bird):
         self.sfc = pg.image.load("fig/flower_syokudaiookonnyaku.png")
@@ -86,7 +86,7 @@ class Frowe_up:
         scr.sfc.blit(self.sfc, self.rct)
     
     def update(self, scr:Screen):
-        self.rct.move_ip(0,-5)
+        self.rct.move_ip(0,-3)
         self.blit(scr)
 
 class Frowe_d:
@@ -100,7 +100,7 @@ class Frowe_d:
         scr.sfc.blit(self.sfc, self.rct)
     
     def update(self, scr:Screen):
-        self.rct.move_ip(0,5)
+        self.rct.move_ip(0,3)
         self.blit(scr)
 
 class Frowe_l:
@@ -114,7 +114,7 @@ class Frowe_l:
         scr.sfc.blit(self.sfc, self.rct)
     
     def update(self, scr:Screen):
-        self.rct.move_ip(+5,0)
+        self.rct.move_ip(3,0)
         self.blit(scr)
 
 class Frowe_r:
@@ -128,8 +128,10 @@ class Frowe_r:
         scr.sfc.blit(self.sfc, self.rct)
     
     def update(self, scr:Screen):
-        self.rct.move_ip(-5,0)
+        self.rct.move_ip(3,0)
         self.blit(scr)
+
+#音楽が流れる
 def bgm():
     pg.mixer.music.load("fig/famipop3.mp3")
     pg.mixer.music.play(loops=-1,start=0.0)
@@ -159,13 +161,14 @@ def main():
             if event.type == pg.QUIT: 
                 return
             if event.type == pg.KEYDOWN and event.key == pg.K_w:
-                beams  = Frowe_up(kkt)
+                beams  = Frowe_up(kkt)#上に打ち出す
             elif event.type == pg.KEYDOWN and event.key == pg.K_s:
-                ume = Frowe_d(kkt)
+                ume = Frowe_d(kkt)    #下に打ち出す
             elif event.type == pg.KEYDOWN and event.key == pg.K_d:
-                dnf = Frowe_l(kkt)
+                dnf = Frowe_l(kkt)    #右に打ち出す
             elif event.type == pg.KEYDOWN and event.key == pg.K_a:
-                hima = Frowe_r(kkt)
+                hima = Frowe_r(kkt)   #左に打ち出す
+        
         kkt.update(scr)
         bkb.update(scr)
         if beams !=0:
@@ -201,5 +204,6 @@ def check_bound(rct, scr_rct):
 if __name__ == "__main__":
     pg.init()
     main()
+    
     pg.quit()
     sys.exit()
