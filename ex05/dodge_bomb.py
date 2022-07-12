@@ -128,7 +128,7 @@ class Frowe_r:
         scr.sfc.blit(self.sfc, self.rct)
     
     def update(self, scr:Screen):
-        self.rct.move_ip(3,0)
+        self.rct.move_ip(-3,0)
         self.blit(scr)
 
 #音楽が流れる
@@ -203,7 +203,7 @@ def check_bound(rct, scr_rct):
 
 if __name__ == "__main__":
     pg.init()
+    bgm()
     main()
-    
     pg.quit()
     sys.exit()
