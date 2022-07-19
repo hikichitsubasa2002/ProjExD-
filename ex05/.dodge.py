@@ -5,6 +5,7 @@ import pygame as pg
 import sys
 import random
 
+
 class Screen:
     def __init__(self,title, wh, image): 
          # 練習1：スクリーンと背景画像
