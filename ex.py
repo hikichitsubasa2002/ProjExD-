@@ -150,7 +150,7 @@ def main():
     bkd = Bomb((255,0,0), 50, (+1, +1), scr)
     bkd2 = Bomb2((255,0,0), 10, (+1, +1), scr)
     bkd3 = Bomb3((255,0,0), 10, (+1, +1), scr)
-    #小窓の削除
+    #
     root = tk.Tk()
     root.withdraw()
 
